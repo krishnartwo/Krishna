@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102a43">
+<title>PennyWise — Personal Expense Tracker</title>
+<style>
+:root{--navy:#102a43;--blue:#2463eb;--teal:#0f9d8a;--bg:#f4f7fb;--card:#fff;--text:#182230;--muted:#68778a;--border:#e2e8f0;--red:#d64545;--amber:#b7791f;--shadow:0 8px 28px rgba(16,42,67,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1200px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--navy);color:white;display:grid;place-items:center;font-size:23px}.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--border);background:white;color:var(--navy);border-radius:10px;padding:10px 13px;font-weight:650;font-size:13px}.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}.btn.dark{background:var(--navy);color:white;border-color:var(--navy)}.btn.danger{color:var(--red)}.btn:hover{filter:brightness(.97)}.hero{background:linear-gradient(120deg,#102a43,#174c71);color:#fff;border-radius:20px;padding:25px 27px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}.hero h2{margin:0 0 8px;font-size:clamp(21px,3vw,29px)}.hero p{margin:0;color:#d5e3ef;max-width:600px;line-height:1.5}.month-pick{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.month-pick label{font-size:12px;color:#d5e3ef}.month-pick input{padding:9px;border:0;border-radius:9px}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.stat .label{font-size:13px;color:var(--muted);margin-bottom:12px}.stat .value{font-size:clamp(19px,2.3vw,27px);font-weight:750;letter-spacing:-.5px;overflow-wrap:anywhere}.stat .hint{font-size:12px;color:var(--muted);margin-top:8px}.stat.income .value{color:var(--teal)}.stat.expense .value{color:var(--red)}.stat.saving .value{color:var(--blue)}.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.45fr);gap:18px;align-items:start}.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:18px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.panel h3{font-size:17px;margin:0}.subtle{font-size:12px;color:var(--muted)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#46566a}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #d7e0ea;border-radius:10px;background:#fff;color:var(--text);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2463eb1a}.form-actions{display:flex;gap:8px;margin-top:14px}.form-actions .btn{flex:1}.filters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:9px;margin-bottom:13px}.filters input,.filters select{min-width:0;width:100%;padding:10px;border:1px solid var(--border);border-radius:9px;background:white}.table-wrap{overflow-x:auto;width:100%}table{border-collapse:collapse;width:100%;font-size:13px;white-space:nowrap}th{text-align:left;color:var(--muted);font-weight:650;background:#f8fafc}td,th{padding:12px 10px;border-bottom:1px solid var(--border)}td.amount{text-align:right;font-weight:700}td:last-child,th:last-child{text-align:right}.badge{display:inline-block;padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#edf2f7;color:#46566a}.badge.income{background:#e2f7f0;color:#087f68}.badge.expense{background:#fdecec;color:#b42323}.empty{text-align:center;color:var(--muted);padding:30px 12px}.delete-btn{border:0;background:transparent;color:var(--red);font-size:17px;padding:3px 7px}.progress-row{margin:14px 0}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:7px}.progress-label span:last-child{color:var(--muted)}.track{height:8px;background:#edf1f6;border-radius:99px;overflow:hidden}.bar{height:100%;background:var(--blue);border-radius:99px}.category-list{display:flex;flex-direction:column;gap:8px}.category-item{display:flex;justify-content:space-between;gap:12px;font-size:13px}.category-item span:last-child{font-weight:700}.tip{background:#eff8ff;border:1px solid #cce8ff;color:#184b72;border-radius:12px;padding:13px;font-size:13px;line-height:1.5}.footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 25px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:12px 17px;border-radius:10px;box-shadow:var(--shadow);z-index:10;display:none;font-size:13px;max-width:90vw}.privacy{font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px}.section-title{margin:2px 0 14px;font-size:17px}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.month-pick{width:100%}.month-pick input{flex:1;min-width:140px}}
+@media(max-width:520px){.app{padding:12px}.topbar{align-items:flex-start;flex-direction:column}.top-actions{width:100%}.top-actions .btn{flex:1}.brand h1{font-size:20px}.hero{padding:20px;border-radius:15px}.panel{padding:15px;border-radius:14px}.cards{gap:9px}.stat{padding:13px;border-radius:13px}.stat .label{font-size:11px}.stat .hint{font-size:11px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.panel-head{align-items:flex-start}.btn{padding:10px;font-size:12px}}
+@media print{body{background:white}.app{max-width:none;padding:0}.top-actions,.form-panel,.filters,.delete-col,.month-pick,.footer .no-print{display:none!important}.hero{background:#fff;color:#102a43;border:1px solid #ccd5df;padding:14px}.hero p,.month-pick label{color:#46566a}.cards{grid-template-columns:repeat(4,1fr)}.stat,.panel{box-shadow:none;break-inside:avoid;padding:12px}.layout{grid-template-columns:1fr}.table-wrap{overflow:visible}table{font-size:10px;white-space:normal}td,th{padding:6px 5px}.panel{margin-bottom:10px}.stat .value{font-size:18px}.print-only{display:block!important}}
+.print-only{display:none}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">₹</div><div><h1>PennyWise</h1><p>Your money, with a plan.</p></div></div>
+    <div class="top-actions">
+      <button class="btn" id="exportCsvBtn">Export CSV</button>
+      <button class="btn primary" id="exportPdfBtn">Export all data as PDF</button>
+    </div>
+  </header>
+  <section class="hero">
+    <div><h2>Make every rupee count.</h2><p>Track spending, understand your habits, and build better money routines — one month at a time.</p></div>
+    <div class="month-pick"><label for="monthFilter">Dashboard month</label><input type="month" id="monthFilter"></div>
+  </section>
+  <section class="cards">
+    <div class="stat income"><div class="label">Income</div><div class="value" id="incomeTotal">₹0</div><div class="hint">Money received this month</div></div>
+    <div class="stat expense"><div class="label">Expenses</div><div class="value" id="expenseTotal">₹0</div><div class="hint">Money spent this month</div></div>
+    <div class="stat saving"><div class="label">Money left</div><div class="value" id="balanceTotal">₹0</div><div class="hint">Income minus expenses</div></div>
+    <div class="stat"><div class="label">Savings rate</div><div class="value" id="savingsRate">0%</div><div class="hint">Balance as a share of income</div></div>
+  </section>
+  <div class="layout">
+    <div>
+      <section class="panel form-panel">
+        <div class="panel-head"><h3 id="formTitle">Add a transaction</h3><span class="subtle">Required fields *</span></div>
+        <form id="transactionForm">
+          <input type="hidden" id="editId">
+          <div class="form-grid">
+            <div class="field"><label for="type">Transaction type *</label><select id="type" required><option value="expense">Expense</option><option value="income">Income</option></select></div>
+            <div class="field"><label for="amount">Amount (INR) *</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="e.g. 450" required></div>
+            <div class="field"><label for="date">Date *</label><input id="date" type="date" required></div>
+            <div class="field"><label for="category">Category *</label><select id="category" required></select></div>
+            <div class="field full"><label for="description">Description *</label><input id="description" maxlength="100" placeholder="e.g. Weekly groceries" required></div>
+            <div class="field full"><label for="needType">Spending classification</label><select id="needType"><option value="Need">Essential — a need</option><option value="Want">Lifestyle — a want</option><option value="Avoidable">Avoidable — could reduce</option><option value="Saving">Savings / financial goal</option><option value="N/A">Not applicable</option></select></div>
+            <div class="field full"><label for="notes">Notes (optional)</label><textarea id="notes" rows="2" maxlength="250" placeholder="Any extra details..."></textarea></div>
+          </div>
+          <div class="form-actions"><button class="btn primary" type="submit" id="saveBtn">Add transaction</button><button class="btn" type="button" id="cancelEditBtn" style="display:none">Cancel edit</button></div>
+        </form>
+        <div class="privacy">🔒 Your entries are stored in this browser on this device. They are not sent to a server. Use Export CSV or Export all data as PDF for a backup.</div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Monthly spending breakdown</h3><span class="subtle">Selected month</span></div>
+        <div id="breakdown"><div class="empty">Add expenses to see your breakdown.</div></div>
+      </section>
+      <section class="panel">
+        <h3 class="section-title">A simple money tip</h3>
+        <div class="tip" id="moneyTip">Track every transaction for 30 days before making big changes. Your real spending pattern is more useful than a guess.</div>
+      </section>
+    </div>
+    <div>
+      <section class="panel">
+        <div class="panel-head"><h3>Transactions</h3><span class="subtle" id="transactionCount">0 records</span></div>
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Search descriptions...">
+          <select id="typeFilter"><option value="all">All types</option><option value="expense">Expenses</option><option value="income">Income</option></select>
+          <select id="categoryFilter"><option value="all">All categories</option></select>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th style="text-align:right">Amount</th><th class="delete-col">Actions</th></tr></thead><tbody id="transactionRows"></tbody></table></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Spending by classification</h3><span class="subtle">Selected month</span></div>
+        <div id="classificationBreakdown" class="category-list"><div class="empty">No spending recorded yet.</div></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Monthly budget</h3><span class="subtle">Optional target</span></div>
+        <div class="form-grid">
+          <div class="field full"><label for="budgetAmount">Expense budget (INR)</label><input id="budgetAmount" type="number" min="0" step="100" placeholder="e.g. 20000"></div>
+          <div class="field full"><button class="btn dark" id="saveBudgetBtn" type="button">Save monthly budget</button></div>
+        </div>
+        <div id="budgetSummary" style="margin-top:14px"></div>
+      </section>
+    </div>
+  </div>
+  <div class="footer">PennyWise Personal Expense Tracker · Simple, private, practical money management.<br><span class="no-print">Tip: export your data regularly so you have a copy if you change devices or clear browser data.</span></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script>
+(() => {
+  const STORAGE_KEY = 'pennywise_transactions_v1';
+  const BUDGET_KEY = 'pennywise_budgets_v1';
+  const expenseCategories = ['Food & Groceries','Housing & Rent','Utilities & Bills','Transport','Health & Medical','Education','Shopping','Dining & Delivery','Entertainment','Subscriptions','Family & Kids','Personal Care','Debt / EMI','Travel','Other Expense'];
+  const incomeCategories = ['Salary','Freelance / Business','Interest','Gift','Refund','Other Income'];
+  const $ = id => document.getElementById(id);
+  const today = new Date();
+  const localDate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const monthNow = localDate(today).slice(0,7);
+  let transactions = loadTransactions();
+  let budgets = loadBudgets();
+  $('monthFilter').value = monthNow;
+  $('date').value = localDate(today);
+
+  function loadTransactions(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(x)?x:[]}catch{return []}}
+  function loadBudgets(){try{const x=JSON.parse(localStorage.getItem(BUDGET_KEY)||'{}');return x&&typeof x==='object'?x:{}}catch{return {}}}
+  function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(transactions));localStorage.setItem(BUDGET_KEY,JSON.stringify(budgets))}
+  function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(Number(n)||0)}
+  function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function toast(msg){const el=$('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',2600)}
+  function monthTransactions(){const m=$('monthFilter').value;return transactions.filter(t=>t.date.startsWith(m))}
+  function setCategories(selected){const list=$('type').value==='income'?incomeCategories:expenseCategories;$('category').innerHTML=list.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(selected&&list.includes(selected))$('category').value=selected}
+  function refreshCategoryFilter(){const current=$('categoryFilter').value;const cats=[...new Set(transactions.map(t=>t.category))].sort();$('categoryFilter').innerHTML='<option value="all">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(cats.includes(current))$('categoryFilter').value=current}
+  function render(){
+    const month=monthTransactions();
+    const inc=month.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+    const exp=month.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+    const bal=inc-exp;
+    $('incomeTotal').textContent=money(inc);$('expenseTotal').textContent=money(exp);$('balanceTotal').textContent=money(bal);
+    $('savingsRate').textContent=inc>0?`${((bal/inc)*100).toFixed(1)}%`:'—';
+    renderBreakdown(month);renderClassifications(month);renderBudget(exp);
+    renderRows();refreshCategoryFilter();
+    $('transactionCount').textContent=`${transactions.length} record${transactions.length===1?'':'s'} total`;
+    const avoid=month.filter(t=>t.type==='expense'&&t.needType==='Avoidable').reduce((s,t)=>s+t.amount,0);
+    $('moneyTip').textContent=month.length===0?'Start by adding your income and expenses. After a full month, you will be able to spot patterns and set realistic goals.':avoid>0?`You recorded ${money(avoid)} in avoidable expenses this month. Review these entries and choose one realistic change for next month.`:exp>0?`Your expense total is ${money(exp)} this month. Compare it with your budget and look for changes that do not compromise essential needs.`:'Nice start. Keep recording transactions to build a clearer picture of your money.';
+  }
+  function renderBreakdown(month){
+    const items={};month.filter(t=>t.type==='expense').forEach(t=>items[t.category]=(items[t.category]||0)+t.amount);
+    const pairs=Object.entries(items).sort((a,b)=>b[1]-a[1]);const total=pairs.reduce((s,p)=>s+p[1],0);
+    if(!pairs.length){$('breakdown').innerHTML='<div class="empty">Add expenses to see your breakdown.</div>';return}
+    $('breakdown').innerHTML=pairs.map(([name,val])=>`<div class="progress-row"><div class="progress-label"><span>${esc(name)}</span><span>${money(val)} · ${total?(val/total*100).toFixed(1):0}%</span></div><div class="track"><div class="bar" style="width:${total?val/total*100:0}%"></div></div></div>`).join('');
+  }
+  function renderClassifications(month){
+    const labels=['Need','Want','Avoidable','Saving','N/A'];const totals={};labels.forEach(k=>totals[k]=0);
+    month.filter(t=>t.type==='expense').forEach(t=>totals[t.needType]=(totals[t.needType]||0)+t.amount);
+    const any=Object.values(totals).some(v=>v>0);
+    $('classificationBreakdown').innerHTML=any?labels.filter(k=>totals[k]>0).map(k=>`<div class="category-item"><span>${({Need:'Essential — a need',Want:'Lifestyle — a want',Avoidable:'Avoidable spending',Saving:'Savings / financial goal','N/A':'Not classified'})[k]}</span><span>${money(totals[k])}</span></div>`).join(''):'<div class="empty">No spending recorded yet.</div>';
+  }
+  function renderBudget(exp){
+    const m=$('monthFilter').value;const b=Number(budgets[m]||0);$('budgetAmount').value=b||'';
+    if(!b){$('budgetSummary').innerHTML='<div class="subtle">Set a budget to track how your spending compares with your target.</div>';return}
+    const remaining=b-exp;const pct=Math.min(100,exp/b*100);
+    $('budgetSummary').innerHTML=`<div class="progress-label"><span>${money(exp)} spent of ${money(b)}</span><span>${pct.toFixed(1)}%</span></div><div class="track"><div class="bar" style="width:${pct}%;background:${exp>b?'#d64545':'#0f9d8a'}"></div></div><div class="subtle" style="margin-top:9px;color:${remaining<0?'#b42323':'#087f68'}">${remaining<0?`Over budget by ${money(Math.abs(remaining))}`:`${money(remaining)} remaining`}</div>`;
+  }
+  function renderRows(){
+    const search=$('searchInput').value.trim().toLowerCase(), type=$('typeFilter').value, cat=$('categoryFilter').value;
+    const list=[...transactions].filter(t=>(!search||(t.description+' '+(t.notes||'')).toLowerCase().includes(search))&&(type==='all'||t.type===type)&&(cat==='all'||t.category===cat)).sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt);
+    $('transactionRows').innerHTML=list.length?list.map(t=>`<tr><td>${esc(t.date)}</td><td><strong>${esc(t.description)}</strong>${t.notes?`<div class="subtle">${esc(t.notes)}</div>`:''}</td><td>${esc(t.category)}</td><td><span class="badge ${t.type}">${t.type==='income'?'Income':'Expense'}</span></td><td class="amount" style="color:${t.type==='income'?'#087f68':'#b42323'}">${t.type==='income'?'+':'−'}${money(t.amount)}</td><td class="delete-col"><button class="btn" data-edit="${esc(t.id)}" aria-label="Edit transaction">Edit</button> <button class="delete-btn" data-delete="${esc(t.id)}" aria-label="Delete transaction">×</button></td></tr>`).join(''):'<tr><td colspan="6" class="empty">No transactions match. Add a transaction or change your filters.</td></tr>';
+  }
+  $('type').addEventListener('change',()=>setCategories());
+  $('transactionForm').addEventListener('submit',e=>{
+    e.preventDefault();const id=$('editId').value;
+    const t={id:id||`${Date.now()}_${Math.random().toString(36).slice(2,8)}`,type:$('type').value,amount:Number($('amount').value),date:$('date').value,category:$('category').value,description:$('description').value.trim(),needType:$('type').value==='income'?'N/A':$('needType').value,notes:$('notes').value.trim(),createdAt:id?(transactions.find(x=>x.id===id)?.createdAt||Date.now()):Date.now()};
+    if(!t.date||!t.description||!Number.isFinite(t.amount)||t.amount<=0){toast('Please enter a valid date, description, and amount.');return}
+    if(id)transactions=transactions.map(x=>x.id===id?t:x);else transactions.push(t);
+    persist();resetForm();render();toast(id?'Transaction updated.':'Transaction added.');
+  });
+  function resetForm(){$('transactionForm').reset();$('editId').value='';$('date').value=localDate(today);$('type').value='expense';setCategories();$('formTitle').textContent='Add a transaction';$('saveBtn').textContent='Add transaction';$('cancelEditBtn').style.display='none';$('needType').value='Need'}
+  $('cancelEditBtn').addEventListener('click',resetForm);
+  $('transactionRows').addEventListener('click',e=>{
+    const del=e.target.closest('[data-delete]');const edit=e.target.closest('[data-edit]');
+    if(del){const t=transactions.find(x=>x.id===del.dataset.delete);if(t&&confirm(`Delete "${t.description}"? This cannot be undone.`)){transactions=transactions.filter(x=>x.id!==t.id);persist();render();toast('Transaction deleted.')} }
+    if(edit){const t=transactions.find(x=>x.id===edit.dataset.edit);if(!t)return;$('editId').value=t.id;$('type').value=t.type;setCategories(t.category);$('amount').value=t.amount;$('date').value=t.date;$('description').value=t.description;$('needType').value=t.needType||'Need';$('notes').value=t.notes||'';$('formTitle').textContent='Edit transaction';$('saveBtn').textContent='Save changes';$('cancelEditBtn').style.display='block';$('transactionForm').scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+  ['monthFilter','searchInput','typeFilter','categoryFilter'].forEach(id=>$(id).addEventListener('input',render));
+  $('saveBudgetBtn').addEventListener('click',()=>{const v=Number($('budgetAmount').value);const m=$('monthFilter').value;if(!m||!Number.isFinite(v)||v<0){toast('Enter a valid budget amount.');return}if(v===0)delete budgets[m];else budgets[m]=v;persist();render();toast('Monthly budget saved.')});
+  function downloadBlob(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  $('exportCsvBtn').addEventListener('click',()=>{
+    if(!transactions.length){toast('There is no data to export yet.');return}
+    const headers=['Date','Type','Amount (INR)','Category','Description','Classification','Notes'];
+    const rows=transactions.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(t=>[t.date,t.type,t.amount,t.category,t.description,t.needType,t.notes||'']);
+    const csv=[headers,...rows].map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+    downloadBlob(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),`pennywise-transactions-${localDate(today)}.csv`);toast('CSV export downloaded.');
+  });
+  $('exportPdfBtn').addEventListener('click',()=>{
+    if(!window.jspdf||!window.jspdf.jsPDF){toast('PDF library could not load. Check your internet connection and try again.');return}
+    const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:'pt',format:'a4'});const pageW=doc.internal.pageSize.getWidth();
+    const all=[...transactions].sort((a,b)=>a.date.localeCompare(b.date)||a.createdAt-b.createdAt);
+    const totalIncome=all.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+    const totalExpense=all.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+    doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('PennyWise — Personal Finance Report',40,45);
+    doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text(`Generated: ${localDate(today)}  |  All-time transaction history`,40,63);
+    doc.setFontSize(11);doc.text(`Total income: ${money(totalIncome)}     Total expenses: ${money(totalExpense)}     Net balance: ${money(totalIncome-totalExpense)}`,40,86);
+    doc.setFontSize(13);doc.setFont('helvetica','bold');doc.text('All transactions',40,115);
+    const tableRows=all.map(t=>[t.date,t.type==='income'?'Income':'Expense',money(t.amount),t.category,t.description,t.needType||'',t.notes||'']);
+    if(doc.autoTable){doc.autoTable({startY:127,head:[['Date','Type','Amount','Category','Description','Classification','Notes']],body:tableRows,theme:'striped',styles:{fontSize:7,cellPadding:4,overflow:'linebreak'},headStyles:{fillColor:[16,42,67]},columnStyles:{0:{cellWidth:55},1:{cellWidth:45},2:{cellWidth:65},3:{cellWidth:80},4:{cellWidth:105},5:{cellWidth:65},6:{cellWidth:'auto'}},margin:{left:40,right:40},didDrawPage:()=>{doc.setFontSize(8);doc.setTextColor(110);doc.text(`PennyWise · Page ${doc.internal.getNumberOfPages()}`,pageW-40,doc.internal.pageSize.getHeight()-18,{align:'right'})}})}else{let y=130;tableRows.forEach(row=>{const line=row.join(' | ');const lines=doc.splitTextToSize(line,pageW-80);if(y+lines.length*12>doc.internal.pageSize.getHeight()-40){doc.addPage();y=40}doc.text(lines,40,y);y+=lines.length*12+5})}
+    if(doc.autoTable){doc.addPage();doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('Monthly summaries',40,45);const byMonth={};all.forEach(t=>{const m=t.date.slice(0,7);if(!byMonth[m])byMonth[m]={income:0,expense:0,count:0};byMonth[m][t.type]+=t.amount;byMonth[m].count++});doc.autoTable({startY:60,head:[['Month','Income','Expenses','Net','Transactions']],body:Object.entries(byMonth).sort((a,b)=>a[0].localeCompare(b[0])).map(([m,v])=>[m,money(v.income),money(v.expense),money(v.income-v.expense),String(v.count)]),theme:'striped',styles:{fontSize:9},headStyles:{fillColor:[16,42,67]},margin:{left:40,right:40}});
+      doc.setFont('helvetica','bold');doc.setFontSize(13);doc.text('Monthly budgets',40,(doc.lastAutoTable?.finalY||100)+35);const budgetRows=Object.entries(budgets).sort((a,b)=>a[0].localeCompare(b[0])).map(([m,b])=>{const spent=all.filter(t=>t.date.startsWith(m)&&t.type==='expense').reduce((s,t)=>s+t.amount,0);return[m,money(b),money(spent),money(b-spent)]});doc.autoTable({startY:(doc.lastAutoTable?.finalY||100)+45,head:[['Month','Budget','Expenses','Remaining']],body:budgetRows.length?budgetRows:[['No budgets saved','','','']],theme:'striped',styles:{fontSize:9},headStyles:{fillColor:[16,42,67]},margin:{left:40,right:40}});
+    }
+    doc.save(`pennywise-full-report-${localDate(today)}.pdf`);toast('Your full PDF report is ready.');
+  });
+  setCategories();refreshCategoryFilter();render();
+})();
+</script>
+</body>
+</html>
